@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Deviosho Shop — цифровые материалы для ПК и игр</title>
+  <meta name="description" content="Deviosho Shop — цифровые конфигурации, диагностика и материалы для ПК и игр. Counter-Strike 2, оптимизация Windows и игровые настройки.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#050505">
+
+  <meta property="og:title" content="Deviosho Shop">
+  <meta property="og:description" content="Цифровые материалы и настройки для ПК и игр.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deviosho.ru/">
+
+  <style>
+    :root{
+      --bg:#050505;
+      --panel:#0b0b0d;
+      --panel2:#101014;
+      --line:rgba(255,255,255,.09);
+      --line2:rgba(255,255,255,.16);
+      --text:#f5f5f7;
+      --muted:#9b9ba3;
+      --muted2:#6f7078;
+      --accent:#fff;
+      --radius:22px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255,255,255,.09), transparent 34%),
+        radial-gradient(circle at 100% 40%, rgba(255,255,255,.035), transparent 30%),
+        var(--bg);
+      color:var(--text);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.55;
+      overflow-x:hidden;
+    }
+
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.035;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+      z-index:20;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:10;
+      backdrop-filter:blur(18px);
+      background:rgba(5,5,5,.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    nav{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:850;
+      letter-spacing:.02em;
+    }
+
+    .brand-mark{
+      width:38px;height:38px;border:1px solid var(--line2);
+      border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(145deg,#18181c,#070707);
+      box-shadow:0 0 30px rgba(255,255,255,.06);
+      font-size:14px;
+    }
+
+    .brand span{font-size:17px}
+    .navlinks{display:flex;gap:8px;align-items:center}
+    .navlinks a{
+      padding:9px 12px;
+      color:var(--muted);
+      font-size:14px;
+      border-radius:10px;
+      transition:.2s;
+    }
+    .navlinks a:hover{color:#fff;background:rgba(255,255,255,.06)}
+
+    .hero{
+      padding:105px 0 85px;
+      text-align:center;
+      position:relative;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:999px;
+      padding:7px 12px;
+      color:#b9b9c0;
+      font-size:12px;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+
+    .dot{width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff}
+
+    h1{
+      margin:24px auto 18px;
+      max-width:920px;
+      font-size:clamp(44px,8vw,88px);
+      line-height:.95;
+      letter-spacing:-.065em;
+      font-weight:900;
+    }
+
+    .hero h1 em{
+      font-style:normal;
+      color:#9d9da5;
+    }
+
+    .hero p{
+      max-width:680px;
+      margin:auto;
+      color:var(--muted);
+      font-size:17px;
+    }
+
+    .actions{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:32px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 20px;
+      border-radius:14px;
+      border:1px solid var(--line2);
+      background:#fff;
+      color:#050505;
+      font-weight:750;
+      font-size:14px;
+      transition:.2s;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(255,255,255,.12)}
+    .btn.secondary{background:#101014;color:#fff;border-color:var(--line2)}
+    .btn.secondary:hover{background:#17171c}
+
+    .section{padding:70px 0}
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:20px;
+      margin-bottom:26px;
+    }
+    .section-head h2{font-size:34px;letter-spacing:-.04em}
+    .section-head p{color:var(--muted);max-width:500px;font-size:14px}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .card{
+      position:relative;
+      min-height:310px;
+      padding:26px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012)),
+        var(--panel);
+      overflow:hidden;
+      transition:.25s;
+    }
+
+    .card:after{
+      content:"";
+      position:absolute;
+      width:180px;height:180px;
+      right:-80px;top:-80px;
+      border-radius:50%;
+      background:rgba(255,255,255,.035);
+      filter:blur(4px);
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:var(--line2);
+      box-shadow:0 20px 60px rgba(0,0,0,.4);
+    }
+
+    .num{
+      color:#666770;
+      font-size:12px;
+      letter-spacing:.15em;
+    }
+
+    .card h3{
+      margin-top:55px;
+      font-size:23px;
+      letter-spacing:-.035em;
+    }
+
+    .card p{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:11px;
+    }
+
+    .price{
+      margin-top:24px;
+      font-size:25px;
+      font-weight:850;
+    }
+
+    .tag{
+      display:inline-block;
+      margin-top:16px;
+      padding:5px 9px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      color:#a6a6ae;
+      font-size:11px;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:14px;
+    }
+
+    .info-card{
+      padding:30px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:var(--panel);
+    }
+
+    .info-card h3{font-size:21px;margin-bottom:15px}
+    .info-card p,.info-card li{color:var(--muted);font-size:14px}
+    .info-card ul{padding-left:18px;display:grid;gap:8px}
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+    .step{
+      padding:22px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.025);
+    }
+    .step strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:8px;
+    }
+    .step span{color:var(--muted);font-size:13px}
+
+    .docs{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .doc{
+      padding:20px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:var(--panel);
+    }
+    .doc b{font-size:14px}
+    .doc p{margin-top:5px;color:var(--muted2);font-size:12px}
+
+    footer{
+      margin-top:70px;
+      padding:35px 0 45px;
+      border-top:1px solid var(--line);
+    }
+    .footer-row{
+      display:flex;
+      justify-content:space-between;
+      gap:25px;
+      flex-wrap:wrap;
+    }
+    footer p{color:var(--muted2);font-size:12px;max-width:650px}
+    .footer-links{display:flex;gap:16px;flex-wrap:wrap}
+    .footer-links a{color:#999aa2;font-size:12px}
+    .footer-links a:hover{color:#fff}
+
+    @media(max-width:850px){
+      .navlinks a:nth-child(-n+2){display:none}
+      .grid,.docs{grid-template-columns:1fr}
+      .info-grid{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr 1fr}
+      .hero{padding-top:80px}
+    }
+
+    @media(max-width:520px){
+      .wrap{width:min(calc(100% - 26px),var(--max))}
+      nav{min-height:64px}
+      .hero{padding:65px 0}
+      .hero p{font-size:15px}
+      .actions .btn{width:100%}
+      .steps{grid-template-columns:1fr}
+      .section{padding:50px 0}
+      .section-head{display:block}
+      .section-head p{margin-top:8px}
+      .card{min-height:275px}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top" aria-label="Deviosho Shop">
+        <span class="brand-mark">D</span>
+        <span>DEViosho <small style="color:#777;font-weight:600">SHOP</small></span>
+      </a>
+
+      <div class="navlinks">
+        <a href="#catalog">Каталог</a>
+        <a href="#how">Как купить</a>
+        <a href="#docs">Документы</a>
+        <a href="https://t.me/DevioshoShopBot" target="_blank" rel="noopener">Бот →</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span> DIGITAL MATERIALS · PC · GAMES</div>
+
+      <h1>Deviosho<br><em>Shop.</em></h1>
+
+      <p>
+        Цифровые материалы собственного производства для ПК и игр:
+        конфигурации, диагностика, настройки и информационные материалы.
+      </p>
+
+      <div class="actions">
+        <a class="btn" href="https://t.me/DevioshoShopBot" target="_blank" rel="noopener">
+          Открыть магазин в Telegram
+        </a>
+        <a class="btn secondary" href="#catalog">Посмотреть ассортимент</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="catalog">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Ассортимент</h2>
+          <p>Актуальные цифровые материалы. Покупка и автоматическая выдача выполняются через Telegram-бот.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="num">01 / CS2</div>
+          <h3>Личный конфиг от Deviosho</h3>
+          <p>
+            Собственный конфигурационный файл для персональной настройки
+            Counter-Strike 2. В комплекте — инструкция по установке.
+          </p>
+          <div class="price">299 ₽</div>
+          <span class="tag">Цифровой материал</span>
+        </article>
+
+        <article class="card">
+          <div class="num">02 / DIAGNOSTICS</div>
+          <h3>Диагностика PC для CS2</h3>
+          <p>
+            Собственный скрипт для отображения основных характеристик ПК
+            и текущей загрузки системных ресурсов.
+          </p>
+          <div class="price">399 ₽</div>
+          <span class="tag">Программный материал</span>
+        </article>
+
+        <article class="card">
+          <div class="num">03 / OPTIMIZATION</div>
+          <h3>Оптимизация ПК под CS2</h3>
+          <p>
+            Информационные материалы, настройки и рекомендации для
+            самостоятельной оптимизации Windows и игрового окружения.
+          </p>
+          <div class="price">199 ₽</div>
+          <span class="tag">Цифровой материал</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Как проходит покупка</h2>
+          <p>Простой процесс без передачи платёжных данных в Telegram-чате.</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <strong>01 — Выберите</strong>
+          <span>Откройте каталог и выберите нужный цифровой материал.</span>
+        </div>
+        <div class="step">
+          <strong>02 — Оплатите</strong>
+          <span>Выберите доступный способ оплаты и перейдите на страницу оплаты.</span>
+        </div>
+        <div class="step">
+          <strong>03 — Подтверждение</strong>
+          <span>После подтверждения платежа заказ получает статус оплаченного.</span>
+        </div>
+        <div class="step">
+          <strong>04 — Получите</strong>
+          <span>Цифровой материал автоматически предоставляется ботом.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>О Deviosho Shop</h3>
+          <p>
+            Deviosho Shop предоставляет цифровые услуги и материалы в сфере
+            компьютерных технологий и игр: конфигурации и настройки,
+            программные материалы собственного производства, диагностику,
+            рекомендации по оптимизации Windows и игровых приложений,
+            инструкции и другие цифровые материалы.
+          </p>
+          <br>
+          <p>
+            Материалы предоставляются в цифровой форме. Магазин не является
+            официальным представителем Valve Corporation.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Продавец</h3>
+          <ul>
+            <li><b style="color:#eee">Карасев Даниил Александрович</b></li>
+            <li>ИНН: 524928932881</li>
+            <li>Налоговый режим: НПД</li>
+            <li>Электронная почта: jrvbug@gmail.com</li>
+            <li>Поддержка: @vtekanie</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="docs">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Документы</h2>
+          <p>Ознакомьтесь с условиями до оформления заказа.</p>
+        </div>
+      </div>
+
+      <div class="docs">
+        <a class="doc" href="https://telegra.ph/Polzovatelskoe-soglashenie-Deviosho-Shop-09-06" target="_blank" rel="noopener">
+          <b>Публичная оферта</b>
+          <p>Условия предоставления цифровых материалов и услуг.</p>
+        </a>
+
+        <a class="doc" href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-Deviosho-Shop-09-06" target="_blank" rel="noopener">
+          <b>Политика конфиденциальности</b>
+          <p>Информация об обработке персональных данных.</p>
+        </a>
+
+        <a class="doc" href="https://deviosho.ru/refund" target="_blank" rel="noopener">
+          <b>Условия возврата</b>
+          <p>Порядок обращения по вопросам возврата.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="info-card" style="text-align:center">
+        <h3>Готовы выбрать материал?</h3>
+        <p>Каталог, оформление заказа и выдача доступны в Telegram-боте Deviosho Shop.</p>
+        <div class="actions">
+          <a class="btn" href="https://t.me/DevioshoShopBot" target="_blank" rel="noopener">Перейти в @DevioshoShopBot</a>
+          <a class="btn secondary" href="mailto:jrvbug@gmail.com">Связаться по e-mail</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <p>
+        © 2026 Deviosho Shop. Цифровые материалы собственного производства.
+        Counter-Strike 2 является продуктом Valve Corporation; Deviosho Shop не является
+        официальным представителем Valve Corporation.
+      </p>
+
+      <div class="footer-links">
+        <a href="https://telegra.ph/Polzovatelskoe-soglashenie-Deviosho-Shop-09-06" target="_blank" rel="noopener">Оферта</a>
+        <a href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-Deviosho-Shop-09-06" target="_blank" rel="noopener">Конфиденциальность</a>
+        <a href="https://deviosho.ru/refund" target="_blank" rel="noopener">Возврат</a>
+        <a href="https://t.me/vtekanie" target="_blank" rel="noopener">Поддержка</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
